@@ -5,12 +5,46 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
+import React, { useState } from 'react';
 import PropTypes from "prop-types"
+import styled from "styled-components"
+import { ThemeProvider } from 'styled-components';
+import { useDarkMode } from '../hooks/useDarkTheme';
+import { GlobalStyles } from "../GlobalStyles/GlobalStyles";
+import { lightTheme, darkTheme } from "./Themes/Themes";
+
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
-import "./layout.css"
+import ThemeToggler from './Themes/ThemeToggler'
+import InfoCard from './InfoCard/InfoCard'
+import ContentCard from './ContentCard/ContentCard';
+
+const Wrapper = styled.div`
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Container = styled.div`
+  display: flex;
+  width: 90%;
+  height: 84vh;
+  align-items: center;
+`
+
+const ToggleThemex = styled.div`
+  position: absolute;
+  right: 5%;
+  top: 0px;
+  background-color: hsl(0,0%,60%);
+  width: 160px;
+  height: 35px;
+  padding:5px 8px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+`;
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,28 +57,22 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [theme, themeToggler] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <ThemeProvider theme={themeMode}>
+      <GlobalStyles />
+      <Wrapper>
+        <ToggleThemex>
+          <ThemeToggler theme={theme} toggleTheme={themeToggler} />
+        </ToggleThemex>
+        <Container>
+          <InfoCard />
+          <ContentCard data={children} />
+        </Container>
+      </Wrapper>
+    </ThemeProvider>
   )
 }
 
