@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+
+import DownloadButton from '../../BasicElements/Button/DownloadButton';
 
 const StyledNavInfo = styled.div`
   display: flex;
@@ -12,9 +12,9 @@ const StyledNavInfo = styled.div`
 const NavInfo = () => {
   return (
     <StyledNavInfo>
-      <div>
-        <FontAwesomeIcon icon={faDownload} /> Download CV
-      </div>
+      <DownloadButton url="#">
+        Download CV
+      </DownloadButton>
     </StyledNavInfo>
   );
 };

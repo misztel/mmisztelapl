@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 
 const StyledContentCard = styled.div`
@@ -38,14 +38,14 @@ const BorderBottomRight = styled.div`
   border-bottom: solid 15px transparent;
 `
 
-function ContentCard({ data }) {
+function ContentCard({ children }) {
 
   return (
     <StyledContentCard>
       <BorderBottomRight />
       <BorderBottom />
       <main>
-        {data}
+        {children}
       </main>
     </StyledContentCard>
   )

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { StaticImage } from 'gatsby-plugin-image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+
+import DownloadButton from '../../BasicElements/Button/DownloadButton';
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,27 +41,26 @@ const StyledProfilePhoto = styled.div`
 const StyledName = styled.div`
   font-size: 2rem;
   padding: 5px 0px;
+  color: ${({ theme }) => theme.primary};
 `;
 
 const StyledPosition = styled.div`
   font-size: 1rem;
   padding: 5px 0px;
+  color: ${({ theme }) => theme.primary};
 `;
 
 const StyledSocials = styled.div`
-  font-size: 1.4rem;
-  padding: 5px 0px;
+
 `;
 
-const StyledDownloadButton = styled.a`
-  color: #33ADE9;
-  text-transform: uppercase;
-  font-weight: 600;
+const SocialIcon = styled.a`
+  font-size: 1.4rem;
+  padding: 5px;
+  color: ${({ theme }) => theme.text};
   transition: all 0.3s ease-in-out;
-  text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    color: #3D3D3D;
+  &:hover{
+    color: ${({ theme }) => theme.primary};
   }
 `;
 
@@ -72,19 +71,24 @@ const ProfileData = () => {
         <StyledProfilePhoto>
           <StaticImage
             alt="Maciej Misztela profile photo"
-            src="../../images/profilephoto.png"
+            src="../../../images/profilephoto.png"
           />
         </StyledProfilePhoto>
         <StyledName>Maciej Misztela</StyledName>
         <StyledPosition>Frontend / Wordpress Developer</StyledPosition>
         <StyledSocials>
-          <FontAwesomeIcon icon={faGithub} /><FontAwesomeIcon icon={faLinkedin} />
+          <SocialIcon href="#" target="_blank">
+            <FontAwesomeIcon icon={faGithub} />
+          </SocialIcon>
+          <SocialIcon href="#" target="_blank">
+            <FontAwesomeIcon icon={faLinkedin} />
+          </SocialIcon>
         </StyledSocials>
       </StyledProfileData>
       <StyledProfileMore>
-        <StyledDownloadButton href="#">
-          <FontAwesomeIcon icon={faDownload} /> Download CV
-        </StyledDownloadButton>
+        <DownloadButton url="#">
+          Download CV
+        </DownloadButton>
       </StyledProfileMore>
     </Wrapper>
   );

@@ -12,11 +12,11 @@ export const GlobalStyles = createGlobalStyle`
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
-    overflow-y: scroll;
+    height: 100%;
   }
 
   body {
-    background: ${({ theme }) => theme.background};
+    background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
     margin: 0;
     box-sizing: border-box;
@@ -25,7 +25,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
     word-wrap: break-word;
-    transition: all 0.30s linear;
-
+    overflow: hidden;
   }
   `

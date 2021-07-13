@@ -5,15 +5,13 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { ThemeProvider } from 'styled-components';
 import { useDarkMode } from '../hooks/useDarkTheme';
 import { GlobalStyles } from "../GlobalStyles/GlobalStyles";
 import { lightTheme, darkTheme } from "./Themes/Themes";
-
-import { useStaticQuery, graphql } from "gatsby"
 
 import ThemeToggler from './Themes/ThemeToggler'
 import InfoCard from './InfoCard/InfoCard'
@@ -47,19 +45,11 @@ const ToggleThemex = styled.div`
 `;
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
 
-  const [theme, themeToggler] = useDarkMode();
+  const [theme, themeToggler, mountedComponent] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
+  if (!mountedComponent) return <div />
   return (
     <ThemeProvider theme={themeMode}>
       <GlobalStyles />
@@ -69,7 +59,9 @@ const Layout = ({ children }) => {
         </ToggleThemex>
         <Container>
           <InfoCard />
-          <ContentCard data={children} />
+          <ContentCard>
+            {children}
+          </ContentCard>
         </Container>
       </Wrapper>
     </ThemeProvider>

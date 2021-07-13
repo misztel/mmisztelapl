@@ -8,5 +8,5 @@ export const darkTheme = {
   body: '#31313A',
   text: 'rgba(255, 255, 255, 0.55)',
   primary: '#33ADE9',
-  background: '#17171B',
+  background: '#26262D',
 }
