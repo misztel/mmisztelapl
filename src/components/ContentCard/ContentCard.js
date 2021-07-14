@@ -10,7 +10,6 @@ import styled from "styled-components"
 
 const StyledContentCard = styled.div`
   position: relative;
-  padding: 20px;
   width: 68%;
   height: 90%;
   background-color: white;
@@ -37,6 +36,13 @@ const BorderBottomRight = styled.div`
   border-top: solid 15px ${({ theme }) => theme.primary};
   border-bottom: solid 15px transparent;
 `
+const StyledCardInner = styled.main`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+`;
+
 
 function ContentCard({ children }) {
 
@@ -44,9 +50,9 @@ function ContentCard({ children }) {
     <StyledContentCard>
       <BorderBottomRight />
       <BorderBottom />
-      <main>
+      <StyledCardInner>
         {children}
-      </main>
+      </StyledCardInner>
     </StyledContentCard>
   )
 }
