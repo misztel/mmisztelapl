@@ -41,6 +41,17 @@ const StyledCardInner = styled.main`
   height: 100%;
   padding: 20px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.primary};
+    border-radius: 3px;
+}
 `;
 
 
